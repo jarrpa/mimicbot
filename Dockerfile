@@ -14,10 +14,12 @@ WORKDIR /usr/src/app
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 RUN apt-get install git-lfs
 
-COPY requirements.txt ./
+COPY requirements.txt requirements-gpu.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY pytest.ini ./
+COPY tests test/
+COPY mimicbot mimicbot/
 RUN mkdir /root/.config /root/.config/mimicbot
 
 RUN echo "#### NOTE: View Dockerfile to see some recommended commands ####"
